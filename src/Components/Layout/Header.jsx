@@ -4,16 +4,14 @@ import { Link, NavLink } from "react-router-dom";
 export default function Header() {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
-  const toggleRef = useRef(null); // <-- new ref for the toggle button
+  const toggleRef = useRef(null);
 
-  // close menu on ESC or click outside (use pointerdown for wide device support)
   useEffect(() => {
     function onKey(e) {
       if (e.key === "Escape") setOpen(false);
     }
 
     function onDocPointerDown(e) {
-      // if menu is open and click is outside BOTH menu and toggle button, close it
       const target = e.target;
       if (
         open &&
@@ -45,9 +43,9 @@ export default function Header() {
     }`;
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50 ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-        <div className="flex items-center justify-between h-16 ">
+    <header className="bg-white shadow-sm sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
           {/* logo */}
           <Link
             to="/"
@@ -55,7 +53,7 @@ export default function Header() {
             aria-label="Homepage"
           >
             <img
-              src="/images/TechWeb_Pixelcraft_logo.jpg"
+              src="/public/images/TechWeb_Pixelcraft_logo.jpg"
               alt="TechWeb PixelCraft"
               className="h-9 sm:h-10 md:h-12 object-contain"
             />
@@ -94,10 +92,55 @@ export default function Header() {
             </Link>
           </nav>
 
-          {/* mobile toggle */}
-          <div className="md:hidden flex items-center">
+          {/* mobile - home, email + toggle */}
+          <div className="md:hidden flex items-center gap-2">
+            {/* Home Icon */}
+            <NavLink
+              to="/"
+              className="p-2 rounded-full text-teal-600 hover:bg-teal-50 transition"
+              aria-label="Home"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                />
+              </svg>
+            </NavLink>
+
+            {/* Email Icon */}
+            <a
+              href="mailto:techwebpixelcraft@gmail.com"
+              className="p-2 rounded-full text-teal-600 hover:bg-teal-50 transition"
+              aria-label="Email us"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+            </a>
+
+            {/* Hamburger Toggle */}
             <button
-              ref={toggleRef} // <-- attach ref here
+              ref={toggleRef}
               type="button"
               aria-expanded={open}
               aria-label={open ? "Close menu" : "Open menu"}
@@ -110,7 +153,7 @@ export default function Header() {
                 stroke="currentColor"
                 strokeWidth="2"
                 viewBox="0 0 24 24"
-                aria-hidden
+                aria-hidden="true"
               >
                 {open ? (
                   <path
@@ -145,42 +188,42 @@ export default function Header() {
           <NavLink
             to="/"
             onClick={() => setOpen(false)}
-            className="block text-slate-800 py-2 rounded-md"
+            className="block text-slate-800 py-2 rounded-md hover:bg-slate-50"
           >
             Home
           </NavLink>
           <NavLink
             to="/templates"
             onClick={() => setOpen(false)}
-            className="block text-slate-800 py-2 rounded-md"
+            className="block text-slate-800 py-2 rounded-md hover:bg-slate-50"
           >
             Templates
           </NavLink>
           <NavLink
             to="/services"
             onClick={() => setOpen(false)}
-            className="block text-slate-800 py-2 rounded-md"
+            className="block text-slate-800 py-2 rounded-md hover:bg-slate-50"
           >
             Services
           </NavLink>
           <NavLink
             to="/work"
             onClick={() => setOpen(false)}
-            className="block text-slate-800 py-2 rounded-md"
+            className="block text-slate-800 py-2 rounded-md hover:bg-slate-50"
           >
             Our Work
           </NavLink>
           <NavLink
             to="/about"
             onClick={() => setOpen(false)}
-            className="block text-slate-800 py-2 rounded-md"
+            className="block text-slate-800 py-2 rounded-md hover:bg-slate-50"
           >
             About
           </NavLink>
           <NavLink
             to="/contact"
             onClick={() => setOpen(false)}
-            className="block text-slate-800 py-2 rounded-md"
+            className="block text-slate-800 py-2 rounded-md hover:bg-slate-50"
           >
             Contact
           </NavLink>
@@ -193,24 +236,6 @@ export default function Header() {
             >
               Get Quote
             </Link>
-          </div>
-
-          <div className="pt-3 border-t text-sm text-slate-500">
-            <div className="py-2">
-              WhatsApp:{" "}
-              <a href="tel:+919999999999" className="text-slate-700 ml-1">
-                +91 99999 99999
-              </a>
-            </div>
-            <div className="py-2">
-              Email:{" "}
-              <a
-                href="mailto:hello@techwebpixelcraft.com"
-                className="text-slate-700 ml-1"
-              >
-                hello@techwebpixelcraft.com
-              </a>
-            </div>
           </div>
         </div>
       </div>

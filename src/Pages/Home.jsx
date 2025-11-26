@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import SectionContainer from "../Components/Common/SectionContainer";
 import Heading from "../Components/Common/Heading";
 import PrimaryButton from "../Components/Common/PrimaryButton";
+import WhatsAppFloat from "../Components/Common/WhatsAppFloat";
 
 export default function Home() {
   const [previewImg, setPreviewImg] = useState(null);
@@ -24,9 +25,35 @@ export default function Home() {
         <SectionContainer className="py-16 lg:py-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div>
-              <div className="inline-block bg-brand-50 text-brand-600 px-3 py-1 rounded-full text-sm font-medium">
-                Design • Digital Identity • Web
+              <div
+                role="status"
+                aria-label="Creative branding, social posts and web design"
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium bg-brand-50 text-brand-600
+             hover:translate-y-[-2px] transition-transform duration-150 ease-out"
+              >
+                <span className="block sm:hidden">Brand • Social • Web</span>
+                <span className="hidden sm:block">
+                  Creative Branding • Social Posts • Web Design
+                </span>
+
+                {/* chevron appears only on hover for larger screens */}
+                <svg
+                  className="hidden sm:block w-3 h-3 transform transition-opacity duration-150 opacity-0 group-hover:opacity-100"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M6 8l4 4 4-4"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </div>
+
               <h1 className="mt-6 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
                 We Don’t Just Design Brands — We Shape Their Digital Identity
               </h1>
@@ -484,11 +511,11 @@ export default function Home() {
                 <div className="mt-6 flex flex-wrap gap-4 text-sm text-slate-600">
                   <div>
                     📞 WhatsApp:{" "}
-                    <a className="text-slate-800" href="tel:+919999999999">
-                      +91 99999 99999
+                    <a className="text-slate-800" href="tel:+919924846727">
+                      +91 99248 46727
                     </a>
                   </div>
-                  <div>✉️ hello@techwebpixelcraft.com</div>
+                  <div>✉️ techwebpixelcraft@gmail.com</div>
                 </div>
               </div>
 
@@ -496,26 +523,59 @@ export default function Home() {
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
-                    alert("Thanks — we will contact you!");
+
+                    const name = e.target.name.value.trim();
+                    const email = e.target.email.value.trim();
+                    const subjectValue = e.target.subject.value.trim();
+                    const message = e.target.message.value.trim();
+
+                    // Build mailto subject + body
+                    const subject = encodeURIComponent(subjectValue);
+                    const body = encodeURIComponent(
+                      `Name: ${name}\nEmail: ${email}\nSubject: ${subjectValue}\n\nMessage:\n${message}`
+                    );
+
+                    window.location.href = `mailto:hello@techwebpixelcraft.com?subject=${subject}&body=${body}`;
                   }}
                 >
                   <label className="block text-sm">Name</label>
                   <input
+                    name="name"
                     className="mt-1 w-full border rounded-md px-3 py-2 text-sm"
                     required
                   />
+
                   <label className="block text-sm mt-3">Email</label>
                   <input
-                    className="mt-1 w-full border rounded-md px-3 py-2 text-sm"
+                    name="email"
                     type="email"
+                    className="mt-1 w-full border rounded-md px-3 py-2 text-sm"
                     required
                   />
+
+                  {/* SUBJECT DROPDOWN */}
+                  <label className="block text-sm mt-3">Subject</label>
+                  <select
+                    name="subject"
+                    className="mt-1 w-full border rounded-md px-3 py-2 text-sm bg-white"
+                    required
+                  >
+                    <option>General Inquiry</option>
+                    <option>Logo & Branding</option>
+                    <option>Website Design</option>
+                    <option>Social Media Design</option>
+                    <option>Print / Brochure</option>
+                    <option>Custom Quote Request</option>
+                  </select>
+
                   <label className="block text-sm mt-3">Message</label>
                   <textarea
+                    name="message"
                     className="mt-1 w-full border rounded-md px-3 py-2 text-sm"
                     rows="4"
                     required
                   />
+
                   <PrimaryButton
                     className="mt-4 w-full"
                     variant="primary"
@@ -528,6 +588,7 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <WhatsAppFloat />
         </SectionContainer>
       </section>
     </>
