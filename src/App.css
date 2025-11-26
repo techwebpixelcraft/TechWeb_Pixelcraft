@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+/* small custom */
+:root {
+  --teal-500: #0fb6b3;
+  --teal-600: #0b9aa6;
+}
+
+/* small custom helpers */
+.card-shadow {
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.06);
+}
+
+/* basic body smoothing */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
