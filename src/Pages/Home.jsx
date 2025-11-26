@@ -615,8 +615,8 @@ export default function Home() {
                 <div className="mt-6 flex flex-wrap gap-4 text-sm text-slate-600">
                   <div>
                     📞 WhatsApp:{" "}
-                    <a className="text-slate-800" href="tel:+919924846727">
-                      +91 99248 46727
+                    <a className="text-slate-800" href="tel:+919924829289">
+                      +91 9924829289
                     </a>
                   </div>
                   <div>✉️ techwebpixelcraft@gmail.com</div>

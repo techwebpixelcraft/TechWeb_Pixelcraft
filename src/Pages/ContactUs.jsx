@@ -128,7 +128,7 @@ export default function ContactCreative() {
       return;
     }
 
-    const waNumber = "919924846727"; // your number without +
+    const waNumber = "919924829289"; // your number without +
     const lines = [
       `New Lead: ${form.subject}`,
       `Website: ${window.location.href}`,
@@ -188,8 +188,8 @@ export default function ContactCreative() {
                 </svg>
                 <div className="text-sm">
                   <div className="font-medium">WhatsApp</div>
-                  <a className="text-slate-700 block" href="tel:+919924846727">
-                    +91 99248 46727
+                  <a className="text-slate-700 block" href="tel:+919924829289">
+                    +91 9924829289
                   </a>
                 </div>
               </motion.div>

@@ -135,8 +135,8 @@ export default function Footer() {
             <div className="text-sm text-slate-600">
               <div>
                 WhatsApp:{" "}
-                <a href="tel:+919924846727" className="text-slate-800">
-                  +91 99248 46727
+                <a href="tel:+919924829289" className="text-slate-800">
+                  +91 99248 29289
                 </a>
               </div>
               <div className="mt-2">
