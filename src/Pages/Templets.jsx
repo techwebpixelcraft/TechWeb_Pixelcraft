@@ -28,7 +28,7 @@ export default function Templates() {
       desc: "Khodal Info — service flyer showing Aadhaar & PAN services.",
     },
     {
-      src: "https://github.com/techwebpixelcraft/TechWeb_Pixelcraft/blob/main/public/images/TechWeb_Pixelcraft_introduce.jpg?raw=true ",
+      src: "/images/TechWeb_Pixelcraft_introduce.jpg",
       alt: "TechWeb PixelCraft Intro",
       desc: "Intro visual for TechWeb PixelCraft brand presentation.",
     },
