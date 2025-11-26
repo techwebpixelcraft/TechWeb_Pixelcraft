@@ -13,27 +13,27 @@ export default function Templates() {
   // sample templates list (use files you uploaded to workspace)
   const templates = [
     {
-      src: "/public/images/khodal_info_logo.jpg",
+      src: "/images/khodal_info_logo.jpg",
       alt: "Khodal Info Logo",
       desc: "Khodal Info — official logo used on visiting cards and banners.",
     },
     {
-      src: "/public/images/TechWeb_Pixelcraft_logo.jpg",
+      src: "/images/TechWeb_Pixelcraft_logo.jpg",
       alt: "TechWeb PixelCraft Logo",
       desc: "TechWeb PixelCraft — primary brand logo for digital and print.",
     },
     {
-      src: "/public/images/khodal_info.jpg",
+      src: "/images/khodal_info.jpg",
       alt: "Khodal Info Poster",
       desc: "Khodal Info — service flyer showing Aadhaar & PAN services.",
     },
     {
-      src: "/public/images/TechWeb_Pixelcraft_introduce.jpg",
+      src: "https://github.com/techwebpixelcraft/TechWeb_Pixelcraft/blob/main/public/images/TechWeb_Pixelcraft_introduce.jpg?raw=true ",
       alt: "TechWeb PixelCraft Intro",
       desc: "Intro visual for TechWeb PixelCraft brand presentation.",
     },
     {
-      src: "/public/images/khodal_info_visting.jpg",
+      src: "/images/khodal_info_visting.jpg",
       alt: "Khodal Info Visiting Card",
       desc: "Visiting card layout for Khodal Info with contact details.",
     },
