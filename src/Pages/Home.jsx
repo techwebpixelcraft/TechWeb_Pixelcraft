@@ -167,7 +167,7 @@ export default function Home() {
             <div className="order-first lg:order-last">
               <div className="bg-white rounded-2xl p-6 card-shadow max-w-md mx-auto">
                 <img
-                  src="/public/images/TechWeb_Pixelcraft_logo.jpg"
+                  src="/images/TechWeb_Pixelcraft_logo.jpg"
                   alt="TechWeb PixelCraft logo"
                   className="w-full h-auto object-contain"
                   draggable="false"
