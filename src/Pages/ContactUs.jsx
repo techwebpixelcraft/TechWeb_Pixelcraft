@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "../Components/ui/Container";
 import PrimaryButton from "../Components/Common/PrimaryButton";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { motion } from "framer-motion";
 
 export default function ContactCreative() {
   const [form, setForm] = useState({
@@ -12,6 +15,47 @@ export default function ContactCreative() {
   });
   const [errors, setErrors] = useState({});
   const [toast, setToast] = useState(null);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 700,
+      once: true,
+      easing: "ease-out-cubic",
+      offset: 80,
+    });
+    // optional: refresh on route change or when content changes
+    return () => {
+      AOS.refreshHard();
+    };
+  }, []);
+
+  // Framer Motion variants
+  const containerVariant = {
+    hidden: { opacity: 0, y: 18 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        staggerChildren: 0.06,
+        when: "beforeChildren",
+      },
+    },
+  };
+
+  const itemVariant = {
+    hidden: { opacity: 0, y: 12, scale: 0.995 },
+    show: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.42, ease: "easeOut" },
+    },
+  };
+
+  const floatVariant = {
+    hover: { y: -4, scale: 1.01, transition: { duration: 0.25 } },
+    tap: { scale: 0.99 },
+  };
 
   // Validation
   function validate() {
@@ -108,8 +152,14 @@ export default function ContactCreative() {
     <Container className="py-14">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* LEFT SECTION */}
-        <div className="lg:col-span-1 flex flex-col justify-center gap-4">
-          <div className="rounded-xl bg-gradient-to-br from-teal-50 to-white p-6 shadow-sm">
+        <motion.div
+          className="lg:col-span-1 flex flex-col justify-center gap-4"
+          data-aos="fade-right"
+          initial={{ opacity: 0, x: -18 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <div className="rounded-xl bg-gradient-to-br from-teal-50 to-white p-6 shadow-sm transform-gpu">
             <h1 className="text-2xl font-bold leading-tight">Get in touch</h1>
             <p className="mt-2 text-slate-600">
               Quick quotes, friendly support and clear timelines. Select a
@@ -118,7 +168,11 @@ export default function ContactCreative() {
 
             <div className="mt-4 grid gap-3">
               {/* WhatsApp */}
-              <div className="flex items-center gap-3">
+              <motion.div
+                className="flex items-center gap-3"
+                whileHover={{ x: 6 }}
+                transition={{ type: "spring", stiffness: 120 }}
+              >
                 <svg
                   className="w-6 h-6 text-teal-600"
                   viewBox="0 0 24 24"
@@ -138,10 +192,14 @@ export default function ContactCreative() {
                     +91 99248 46727
                   </a>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Email */}
-              <div className="flex items-center gap-3">
+              <motion.div
+                className="flex items-center gap-3"
+                whileHover={{ x: 6 }}
+                transition={{ type: "spring", stiffness: 120, damping: 12 }}
+              >
                 <svg
                   className="w-6 h-6 text-teal-600"
                   viewBox="0 0 24 24"
@@ -169,7 +227,7 @@ export default function ContactCreative() {
                     techwebpixelcraft@gmail.com
                   </a>
                 </div>
-              </div>
+              </motion.div>
 
               <div className="mt-2">
                 <a
@@ -181,10 +239,16 @@ export default function ContactCreative() {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* RIGHT SECTION (FORM) */}
-        <div className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm">
+        <motion.div
+          className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.18 }}
+          variants={containerVariant}
+        >
           <div className="flex items-start justify-between gap-4">
             <div>
               <h2 className="text-xl font-bold">Tell us about your project</h2>
@@ -200,7 +264,7 @@ export default function ContactCreative() {
             onSubmit={openMailClient}
           >
             {/* Name */}
-            <div>
+            <motion.div className="" variants={itemVariant}>
               <label className="block text-sm font-medium">Name</label>
               <input
                 name="name"
@@ -210,14 +274,16 @@ export default function ContactCreative() {
                 className={`mt-1 w-full border rounded-md px-3 py-2 text-sm ${
                   errors.name ? "border-red-400" : "border-slate-200"
                 }`}
+                data-aos="fade-up"
+                data-aos-delay="40"
               />
               {errors.name && (
                 <p className="text-xs text-red-500 mt-1">{errors.name}</p>
               )}
-            </div>
+            </motion.div>
 
             {/* Email */}
-            <div>
+            <motion.div className="" variants={itemVariant}>
               <label className="block text-sm font-medium">Email</label>
               <input
                 name="email"
@@ -228,14 +294,16 @@ export default function ContactCreative() {
                 className={`mt-1 w-full border rounded-md px-3 py-2 text-sm ${
                   errors.email ? "border-red-400" : "border-slate-200"
                 }`}
+                data-aos="fade-up"
+                data-aos-delay="60"
               />
               {errors.email && (
                 <p className="text-xs text-red-500 mt-1">{errors.email}</p>
               )}
-            </div>
+            </motion.div>
 
             {/* Phone */}
-            <div>
+            <motion.div className="" variants={itemVariant}>
               <label className="block text-sm font-medium">Phone</label>
               <input
                 name="phone"
@@ -243,17 +311,21 @@ export default function ContactCreative() {
                 onChange={handleChange}
                 placeholder="+91 9xxxxxxxxx"
                 className="mt-1 w-full border rounded-md px-3 py-2 text-sm border-slate-200"
+                data-aos="fade-up"
+                data-aos-delay="80"
               />
-            </div>
+            </motion.div>
 
             {/* Subject */}
-            <div>
+            <motion.div className="" variants={itemVariant}>
               <label className="block text-sm font-medium">Subject</label>
               <select
                 name="subject"
                 value={form.subject}
                 onChange={handleChange}
                 className="mt-1 w-full border rounded-md px-3 py-2 text-sm bg-white"
+                data-aos="fade-up"
+                data-aos-delay="100"
               >
                 <option>General Inquiry</option>
                 <option>Logo & Branding</option>
@@ -262,10 +334,10 @@ export default function ContactCreative() {
                 <option>Print & Brochure</option>
                 <option>Custom Quote</option>
               </select>
-            </div>
+            </motion.div>
 
             {/* Message */}
-            <div className="md:col-span-2">
+            <motion.div className="md:col-span-2" variants={itemVariant}>
               <label className="block text-sm font-medium">Message</label>
               <textarea
                 name="message"
@@ -276,28 +348,42 @@ export default function ContactCreative() {
                 className={`mt-1 w-full border rounded-md px-3 py-2 text-sm ${
                   errors.message ? "border-red-400" : "border-slate-200"
                 }`}
+                data-aos="fade-up"
+                data-aos-delay="120"
               />
               {errors.message && (
                 <p className="text-xs text-red-500 mt-1">{errors.message}</p>
               )}
-            </div>
+            </motion.div>
 
             {/* Buttons */}
-            <div className="md:col-span-2 flex flex-col sm:flex-row items-center gap-3 mt-2">
+            <motion.div
+              className="md:col-span-2 flex flex-col sm:flex-row items-center gap-3 mt-2"
+              variants={itemVariant}
+            >
               {/* Email Button */}
-              <PrimaryButton
-                type="submit"
-                variant="primary"
-                className="w-full sm:w-auto px-5"
+              <motion.div
+                whileHover={{ scale: 1.02, y: -3 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.18 }}
               >
-                Send Email
-              </PrimaryButton>
+                <PrimaryButton
+                  type="submit"
+                  variant="primary"
+                  className="w-full sm:w-auto px-5"
+                >
+                  Send Email
+                </PrimaryButton>
+              </motion.div>
 
               {/* WhatsApp Button */}
-              <button
+              <motion.button
                 type="button"
                 onClick={sendWhatsApp}
                 className="w-full sm:w-auto inline-flex items-center gap-2 justify-center px-4 py-2 rounded-md border text-sm hover:bg-slate-50"
+                variants={floatVariant}
+                whileHover="hover"
+                whileTap="tap"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -308,7 +394,7 @@ export default function ContactCreative() {
                   <path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.624.84 5.055 2.268 7.038L4 29l7.202-2.216A12.98 12.98 0 0 0 16.001 27C22.627 27 28 21.627 28 15S22.627 3 16.001 3zm5.94 18.668c-.25.703-1.457 1.348-2.01 1.396-.553.049-.557.45-3.519-.931-2.963-1.382-4.85-4.77-5.004-4.99-.153-.22-1.195-1.623-1.195-3.093 0-1.47.767-2.19 1.04-2.49.273-.3.6-.372.8-.372.2 0 .4 0 .576.01.188.007.431-.07.675.515.25.603.852 2.087.927 2.239.076.153.127.332.024.532-.102.2-.153.332-.305.515-.153.183-.32.41-.453.55-.152.162-.31.338-.133.662.177.323.789 1.302 1.693 2.107 1.163 1.045 2.144 1.37 2.468 1.523.324.153.514.127.7-.076.187-.203.801-.933 1.015-1.253.214-.32.428-.27.724-.162.296.106 1.872.884 2.193 1.045.321.162.535.24.613.372.077.132.077.703-.173 1.405z" />
                 </svg>
                 WhatsApp
-              </button>
+              </motion.button>
 
               {/* RESET */}
               <button
@@ -328,9 +414,9 @@ export default function ContactCreative() {
               >
                 Reset
               </button>
-            </div>
+            </motion.div>
           </form>
-        </div>
+        </motion.div>
 
         {/* Toast */}
         {toast && (

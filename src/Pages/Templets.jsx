@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import SectionContainer from "../Components/Common/SectionContainer";
 import Heading from "../Components/Common/Heading";
 import PrimaryButton from "../Components/Common/PrimaryButton";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Templates() {
   const [previewImg, setPreviewImg] = useState(null); // { src, alt, desc }
@@ -39,6 +42,17 @@ export default function Templates() {
     },
   ];
 
+  // AOS init
+  useEffect(() => {
+    AOS.init({
+      duration: 700,
+      once: true,
+      easing: "ease-out-cubic",
+      offset: 80,
+    });
+    AOS.refresh();
+  }, []);
+
   // close on Escape
   useEffect(() => {
     function onKey(e) {
@@ -62,6 +76,48 @@ export default function Templates() {
       document.body.style.overflow = "";
     };
   }, [previewImg]);
+
+  // motion variants
+  const gridVariant = {
+    hidden: { opacity: 0, y: 8 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { staggerChildren: 0.06 },
+    },
+  };
+
+  const cardVariant = {
+    hidden: { opacity: 0, y: 10, scale: 0.995 },
+    show: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.36, ease: "easeOut" },
+    },
+    hover: {
+      y: -6,
+      boxShadow: "0px 14px 30px rgba(2,6,23,0.08)",
+      transition: { duration: 0.2 },
+    },
+  };
+
+  const modalBackdrop = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { duration: 0.18 } },
+    exit: { opacity: 0, transition: { duration: 0.18 } },
+  };
+
+  const modalInner = {
+    hidden: { opacity: 0, y: 16, scale: 0.995 },
+    show: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.32, ease: "easeOut" },
+    },
+    exit: { opacity: 0, y: 10, scale: 0.995, transition: { duration: 0.2 } },
+  };
 
   return (
     <main className="min-h-screen">
@@ -105,47 +161,59 @@ export default function Templates() {
       <section id="templates" className="py-10 bg-slate-50">
         <SectionContainer>
           {/* modal */}
-          {previewImg && (
-            <div
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
-              onClick={() => setPreviewImg(null)}
-              aria-hidden="false"
-            >
-              <div
-                className="relative bg-white rounded-lg max-w-4xl w-full shadow-xl overflow-hidden"
-                onClick={(e) => e.stopPropagation()}
-                ref={modalInnerRef}
-                role="dialog"
-                aria-modal="true"
-                aria-label={previewImg.alt || "Image preview"}
+          <AnimatePresence>
+            {previewImg && (
+              <motion.div
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+                onClick={() => setPreviewImg(null)}
+                aria-hidden="false"
+                variants={modalBackdrop}
+                initial="hidden"
+                animate="show"
+                exit="exit"
               >
-                <button
-                  type="button"
-                  onClick={() => setPreviewImg(null)}
-                  className="absolute top-3 right-3 bg-white/90 hover:bg-white p-2 rounded-full shadow focus:outline-none focus:ring-2 focus:ring-teal-300"
-                  aria-label="Close preview"
-                  ref={closeBtnRef}
+                <motion.div
+                  className="relative bg-white rounded-lg max-w-4xl w-full shadow-xl overflow-hidden"
+                  onClick={(e) => e.stopPropagation()}
+                  ref={modalInnerRef}
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label={previewImg.alt || "Image preview"}
+                  variants={modalInner}
+                  initial="hidden"
+                  animate="show"
+                  exit="exit"
                 >
-                  ✕
-                </button>
+                  <button
+                    type="button"
+                    onClick={() => setPreviewImg(null)}
+                    className="absolute top-3 right-3 bg-white/90 hover:bg-white p-2 rounded-full shadow focus:outline-none focus:ring-2 focus:ring-teal-300"
+                    aria-label="Close preview"
+                    ref={closeBtnRef}
+                  >
+                    ✕
+                  </button>
 
-                <div className="w-full bg-slate-100 flex items-center justify-center p-4">
-                  <img
-                    src={previewImg.src}
-                    alt={previewImg.alt || "Preview"}
-                    className="w-full h-auto object-contain max-h-[75vh]"
-                    loading="eager"
-                  />
-                </div>
-
-                {previewImg.desc && (
-                  <div className="p-4 border-t">
-                    <p className="text-sm text-slate-700">{previewImg.desc}</p>
+                  <div className="w-full bg-slate-100 flex items-center justify-center p-4">
+                    <img
+                      src={previewImg.src}
+                      alt={previewImg.alt || "Preview"}
+                      className="w-full h-auto object-contain max-h-[75vh]"
+                      loading="eager"
+                    />
                   </div>
-                )}
-              </div>
-            </div>
-          )}
+
+                  {previewImg.desc && (
+                    <div className="p-4 border-t">
+                      <p className="text-sm text-slate-700">
+                        {previewImg.desc}
+                      </p>
+                    </div>
+                  )}
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* grid header */}
           <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -169,11 +237,21 @@ export default function Templates() {
           </div>
 
           {/* <-- FORCE 2 COLUMNS HERE: always show 2 images per row --> */}
-          <div className="grid grid-cols-2 gap-6">
+          <motion.div
+            className="grid grid-cols-2 gap-6"
+            variants={gridVariant}
+            initial="hidden"
+            animate="show"
+          >
             {templates.map((item, i) => (
-              <article
+              <motion.article
                 key={i}
-                className="bg-white rounded-xl overflow-hidden card-shadow transform hover:-translate-y-1 transition"
+                className="bg-white rounded-xl overflow-hidden card-shadow transform transition"
+                variants={cardVariant}
+                whileHover="hover"
+                tabIndex={-1}
+                data-aos="fade-up"
+                data-aos-delay={20 + i * 30}
               >
                 {/* image (clickable & keyboard accessible) */}
                 <div
@@ -210,9 +288,9 @@ export default function Templates() {
                     {item.desc}
                   </p>
                 </div>
-              </article>
+              </motion.article>
             ))}
-          </div>
+          </motion.div>
         </SectionContainer>
       </section>
     </main>

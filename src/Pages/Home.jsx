@@ -4,19 +4,40 @@ import SectionContainer from "../Components/Common/SectionContainer";
 import Heading from "../Components/Common/Heading";
 import PrimaryButton from "../Components/Common/PrimaryButton";
 import WhatsAppFloat from "../Components/Common/WhatsAppFloat";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const [previewImg, setPreviewImg] = useState(null);
   const modalInnerRef = useRef(null);
 
-  // close modal on ESC
+  // init AOS + close modal on ESC
   useEffect(() => {
+    AOS.init({
+      duration: 700,
+      once: true,
+      easing: "ease-out-cubic",
+      offset: 80,
+    });
+
     function onKey(e) {
       if (e.key === "Escape") setPreviewImg(null);
     }
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, []);
+
+  // framer motion variants (subtle)
+  const fadeUp = {
+    hidden: { opacity: 0, y: 10 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+  const fadeIn = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { duration: 0.5 } },
+  };
+  const cardHover = { whileHover: { scale: 1.02 }, whileTap: { scale: 0.995 } };
 
   return (
     <>
@@ -25,18 +46,19 @@ export default function Home() {
         <SectionContainer className="py-16 lg:py-24">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             <div>
-              <div
+              <motion.div
+                initial="hidden"
+                animate="show"
+                variants={fadeUp}
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium bg-brand-50 text-brand-600 hover:translate-y-[-2px] transition-transform duration-150 ease-out"
                 role="status"
                 aria-label="Creative branding, social posts and web design"
-                className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium bg-brand-50 text-brand-600
-             hover:translate-y-[-2px] transition-transform duration-150 ease-out"
               >
                 <span className="block sm:hidden">Brand • Social • Web</span>
                 <span className="hidden sm:block">
                   Creative Branding • Social Posts • Web Design
                 </span>
 
-                {/* chevron appears only on hover for larger screens */}
                 <svg
                   className="hidden sm:block w-3 h-3 transform transition-opacity duration-150 opacity-0 group-hover:opacity-100"
                   viewBox="0 0 20 20"
@@ -52,38 +74,61 @@ export default function Home() {
                     strokeLinejoin="round"
                   />
                 </svg>
-              </div>
+              </motion.div>
 
-              <h1 className="mt-6 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight">
+              <motion.h1
+                initial="hidden"
+                animate="show"
+                variants={fadeUp}
+                className="mt-6 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight"
+              >
                 We Don’t Just Design Brands — We Shape Their Digital Identity
-              </h1>
-              <p className="mt-5 text-slate-600 max-w-xl">
+              </motion.h1>
+
+              <motion.p
+                initial="hidden"
+                animate="show"
+                variants={fadeIn}
+                className="mt-5 text-slate-600 max-w-xl"
+              >
                 TechWeb PixelCraft blends strategic design with clean
                 development to deliver brand systems, templates, and websites
                 that convert.
-              </p>
+              </motion.p>
 
-              <div className="mt-8 flex flex-wrap gap-3">
-                <PrimaryButton
-                  as={Link}
-                  to="/templates"
-                  variant="primary"
-                  size="lg"
-                >
-                  Explore Designs
-                </PrimaryButton>
+              <motion.div
+                initial="hidden"
+                animate="show"
+                variants={fadeUp}
+                className="mt-8 flex flex-wrap gap-3"
+              >
+                <motion.div {...cardHover}>
+                  <PrimaryButton
+                    as={Link}
+                    to="/templates"
+                    variant="primary"
+                    size="lg"
+                  >
+                    Explore Designs
+                  </PrimaryButton>
+                </motion.div>
 
-                <PrimaryButton
-                  as={Link}
-                  to="/contact"
-                  variant="outline"
-                  size="lg"
-                >
-                  Start My Brand Journey
-                </PrimaryButton>
-              </div>
+                <motion.div {...cardHover}>
+                  <PrimaryButton
+                    as={Link}
+                    to="/contact"
+                    variant="outline"
+                    size="lg"
+                  >
+                    Start My Brand Journey
+                  </PrimaryButton>
+                </motion.div>
+              </motion.div>
 
-              <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm text-slate-500">
+              <div
+                className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm text-slate-500"
+                data-aos="fade-up"
+              >
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 bg-white rounded-md flex items-center justify-center card-shadow">
                     <svg
@@ -197,7 +242,13 @@ export default function Home() {
             </div>
 
             <div className="order-first lg:order-last">
-              <div className="bg-white rounded-2xl p-6 card-shadow max-w-md mx-auto">
+              <motion.div
+                initial="hidden"
+                animate="show"
+                variants={fadeUp}
+                whileHover={{ scale: 1.02 }}
+                className="bg-white rounded-2xl p-6 card-shadow max-w-md mx-auto"
+              >
                 <img
                   src="/images/TechWeb_Pixelcraft_logo.jpg"
                   alt="TechWeb PixelCraft logo"
@@ -211,26 +262,29 @@ export default function Home() {
                     site templates.
                   </p>
                   <div className="mt-4 flex gap-2">
-                    <PrimaryButton
-                      as={Link}
-                      to="/templates"
-                      variant="ghost"
-                      size="md"
-                    >
-                      See samples
-                    </PrimaryButton>
-
-                    <PrimaryButton
-                      as={Link}
-                      to="/contact"
-                      variant="ghost"
-                      size="md"
-                    >
-                      Contact
-                    </PrimaryButton>
+                    <motion.div {...cardHover}>
+                      <PrimaryButton
+                        as={Link}
+                        to="/templates"
+                        variant="ghost"
+                        size="md"
+                      >
+                        See samples
+                      </PrimaryButton>
+                    </motion.div>
+                    <motion.div {...cardHover}>
+                      <PrimaryButton
+                        as={Link}
+                        to="/contact"
+                        variant="ghost"
+                        size="md"
+                      >
+                        Contact
+                      </PrimaryButton>
+                    </motion.div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </SectionContainer>
@@ -244,7 +298,10 @@ export default function Home() {
             subtitle="From identity systems to responsive websites — everything under one roof."
           />
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <article className="bg-white rounded-xl p-6 card-shadow">
+            <article
+              data-aos="fade-up"
+              className="bg-white rounded-xl p-6 card-shadow"
+            >
               <h4 className="font-semibold">Brand Identity</h4>
               <p className="mt-2 text-sm text-slate-600">
                 Strategy-led logos and cohesive identity systems that
@@ -252,7 +309,11 @@ export default function Home() {
               </p>
             </article>
 
-            <article className="bg-white rounded-xl p-6 card-shadow">
+            <article
+              data-aos="fade-up"
+              data-aos-delay="80"
+              className="bg-white rounded-xl p-6 card-shadow"
+            >
               <h4 className="font-semibold">Web Experience</h4>
               <p className="mt-2 text-sm text-slate-600">
                 Conversion-oriented, responsive websites built with clean code
@@ -260,7 +321,11 @@ export default function Home() {
               </p>
             </article>
 
-            <article className="bg-white rounded-xl p-6 card-shadow">
+            <article
+              data-aos="fade-up"
+              data-aos-delay="160"
+              className="bg-white rounded-xl p-6 card-shadow"
+            >
               <h4 className="font-semibold">Print & Social Creatives</h4>
               <p className="mt-2 text-sm text-slate-600">
                 Visiting cards, brochures, social packs — ready to publish and
@@ -268,7 +333,11 @@ export default function Home() {
               </p>
             </article>
 
-            <article className="bg-white rounded-xl p-6 card-shadow">
+            <article
+              data-aos="fade-up"
+              data-aos-delay="240"
+              className="bg-white rounded-xl p-6 card-shadow"
+            >
               <h4 className="font-semibold">Template Packs</h4>
               <p className="mt-2 text-sm text-slate-600">
                 Premium, editable templates for fast deployment and consistent
@@ -308,7 +377,6 @@ export default function Home() {
                   className="w-full h-auto object-contain max-h-[70vh]"
                 />
 
-                {/* description inside modal */}
                 {previewImg.desc && (
                   <div className="p-4 border-t">
                     <p className="text-sm text-slate-700">{previewImg.desc}</p>
@@ -339,7 +407,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* PREVIEW GRID: 2 cols on mobile, 2 on sm, 3 on md, 4 on lg */}
+          {/* PREVIEW GRID */}
           <div className="mt-6 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {[
               {
@@ -368,11 +436,14 @@ export default function Home() {
                 desc: "Visiting card layout for Khodal Info with contact details.",
               },
             ].map((item, i) => (
-              <article
+              <motion.article
                 key={i}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                variants={fadeUp}
                 className="bg-white rounded-xl overflow-hidden card-shadow transform hover:-translate-y-1 transition"
               >
-                {/* Make the image itself clickable to open the modal */}
                 <div
                   className="w-full h-48 bg-gradient-to-tr from-brand-50 to-white flex items-center justify-center overflow-hidden cursor-pointer"
                   role="button"
@@ -385,6 +456,8 @@ export default function Home() {
                     }
                   }}
                   aria-label={`Open preview for template ${i + 1}`}
+                  data-aos="zoom-in"
+                  data-aos-delay={i * 60}
                 >
                   <img
                     src={item.src}
@@ -394,13 +467,12 @@ export default function Home() {
                   />
                 </div>
 
-                {/* stacked footer: title on top, description below */}
                 <div className="p-4 flex flex-col items-start sm:items-center gap-2">
                   <p className="text-sm text-slate-600 w-full text-left sm:text-center">
                     {item.desc}
                   </p>
                 </div>
-              </article>
+              </motion.article>
             ))}
           </div>
         </SectionContainer>
@@ -414,25 +486,41 @@ export default function Home() {
             subtitle="A mix of design thinking, technical craft, and client-first delivery."
           />
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white rounded-xl p-6 card-shadow">
+            <div
+              data-aos="fade-up"
+              data-aos-delay="40"
+              className="bg-white rounded-xl p-6 card-shadow"
+            >
               <h4 className="font-semibold">Design That Feels Personal</h4>
               <p className="mt-2 text-sm text-slate-600">
                 We design with your audience in mind — not just aesthetics.
               </p>
             </div>
-            <div className="bg-white rounded-xl p-6 card-shadow">
+            <div
+              data-aos="fade-up"
+              data-aos-delay="80"
+              className="bg-white rounded-xl p-6 card-shadow"
+            >
               <h4 className="font-semibold">Technology That Works</h4>
               <p className="mt-2 text-sm text-slate-600">
                 Fast-loading, maintainable sites built using modern tools.
               </p>
             </div>
-            <div className="bg-white rounded-xl p-6 card-shadow">
+            <div
+              data-aos="fade-up"
+              data-aos-delay="120"
+              className="bg-white rounded-xl p-6 card-shadow"
+            >
               <h4 className="font-semibold">Premium Quality, Zero Hassle</h4>
               <p className="mt-2 text-sm text-slate-600">
                 Clear process, clear timelines and agency-level quality.
               </p>
             </div>
-            <div className="bg-white rounded-xl p-6 card-shadow">
+            <div
+              data-aos="fade-up"
+              data-aos-delay="160"
+              className="bg-white rounded-xl p-6 card-shadow"
+            >
               <h4 className="font-semibold">End-to-End Partner</h4>
               <p className="mt-2 text-sm text-slate-600">
                 From concept to delivery and small updates — we stay with you.
@@ -450,28 +538,44 @@ export default function Home() {
             subtitle="Simple steps from idea to delivered brand assets."
           />
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white rounded-xl p-6 text-center card-shadow">
+            <div
+              data-aos="fade-up"
+              data-aos-delay="40"
+              className="bg-white rounded-xl p-6 text-center card-shadow"
+            >
               <div className="text-xl font-bold">1</div>
               <h4 className="mt-3 font-semibold">Discover</h4>
               <p className="mt-2 text-sm text-slate-600">
                 We learn your goals, audience and brand personality.
               </p>
             </div>
-            <div className="bg-white rounded-xl p-6 text-center card-shadow">
+            <div
+              data-aos="fade-up"
+              data-aos-delay="80"
+              className="bg-white rounded-xl p-6 text-center card-shadow"
+            >
               <div className="text-xl font-bold">2</div>
               <h4 className="mt-3 font-semibold">Design</h4>
               <p className="mt-2 text-sm text-slate-600">
                 Concepts & drafts with clear rationale and visual options.
               </p>
             </div>
-            <div className="bg-white rounded-xl p-6 text-center card-shadow">
+            <div
+              data-aos="fade-up"
+              data-aos-delay="120"
+              className="bg-white rounded-xl p-6 text-center card-shadow"
+            >
               <div className="text-xl font-bold">3</div>
               <h4 className="mt-3 font-semibold">Refine</h4>
               <p className="mt-2 text-sm text-slate-600">
                 Feedback rounds and polishing until it’s right.
               </p>
             </div>
-            <div className="bg-white rounded-xl p-6 text-center card-shadow">
+            <div
+              data-aos="fade-up"
+              data-aos-delay="160"
+              className="bg-white rounded-xl p-6 text-center card-shadow"
+            >
               <div className="text-xl font-bold">4</div>
               <h4 className="mt-3 font-semibold">Deliver</h4>
               <p className="mt-2 text-sm text-slate-600">
@@ -519,22 +623,21 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="bg-white p-4 rounded-lg shadow-sm">
+              <div
+                className="bg-white p-4 rounded-lg shadow-sm"
+                data-aos="fade-up"
+              >
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
-
                     const name = e.target.name.value.trim();
                     const email = e.target.email.value.trim();
                     const subjectValue = e.target.subject.value.trim();
                     const message = e.target.message.value.trim();
-
-                    // Build mailto subject + body
                     const subject = encodeURIComponent(subjectValue);
                     const body = encodeURIComponent(
                       `Name: ${name}\nEmail: ${email}\nSubject: ${subjectValue}\n\nMessage:\n${message}`
                     );
-
                     window.location.href = `mailto:techwebpixelcraft@gmail.com?subject=${subject}&body=${body}`;
                   }}
                 >
@@ -553,7 +656,6 @@ export default function Home() {
                     required
                   />
 
-                  {/* SUBJECT DROPDOWN */}
                   <label className="block text-sm mt-3">Subject</label>
                   <select
                     name="subject"
