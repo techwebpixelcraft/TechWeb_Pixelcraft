@@ -501,7 +501,7 @@ export default function Home() {
                   </PrimaryButton>
                   <PrimaryButton
                     as="a"
-                    href="mailto:hello@techwebpixelcraft.com"
+                    href="mailto:techwebpixelcraft@gmail.com"
                     variant="outline"
                   >
                     Email Us
@@ -535,7 +535,7 @@ export default function Home() {
                       `Name: ${name}\nEmail: ${email}\nSubject: ${subjectValue}\n\nMessage:\n${message}`
                     );
 
-                    window.location.href = `mailto:hello@techwebpixelcraft.com?subject=${subject}&body=${body}`;
+                    window.location.href = `mailto:techwebpixelcraft@gmail.com?subject=${subject}&body=${body}`;
                   }}
                 >
                   <label className="block text-sm">Name</label>
@@ -581,6 +581,7 @@ export default function Home() {
                     variant="primary"
                     size="md"
                     type="submit"
+                    href="mailto::techwebpixelcraft@gmail.com"
                   >
                     Send Message
                   </PrimaryButton>

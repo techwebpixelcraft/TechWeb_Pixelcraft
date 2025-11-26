@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Prevent crawling of development or internal pages
+Disallow: /admin/
+Disallow: /private/
+Disallow: /secret/
+Disallow: /api/
+
+# Clean URLs only
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.jpg$
+Allow: /*.png$
+Allow: /*.webp$
+
+# Your official sitemap
+Sitemap: https://techwebpixelcraft.com/sitemap.xml

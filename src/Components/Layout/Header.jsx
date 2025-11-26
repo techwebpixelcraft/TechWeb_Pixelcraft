@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
   const toggleRef = useRef(null);
+  const location = useLocation();
 
   useEffect(() => {
     function onKey(e) {
@@ -35,6 +36,13 @@ export default function Header() {
     };
   }, [open]);
 
+  const handleHomeClick = (e) => {
+    if (location.pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   const navClass = ({ isActive }) =>
     `transition-colors duration-150 ${
       isActive
@@ -51,6 +59,7 @@ export default function Header() {
             to="/"
             className="flex items-center gap-3"
             aria-label="Homepage"
+            onClick={handleHomeClick}
           >
             <img
               src="/images/TechWeb_Pixelcraft_logo.jpg"
@@ -65,7 +74,7 @@ export default function Header() {
             role="navigation"
             aria-label="Main navigation"
           >
-            <NavLink to="/" className={navClass} end>
+            <NavLink to="/" className={navClass} end onClick={handleHomeClick}>
               Home
             </NavLink>
             <NavLink to="/templates" className={navClass}>
@@ -99,6 +108,7 @@ export default function Header() {
               to="/"
               className="p-2 rounded-full text-teal-600 hover:bg-teal-50 transition"
               aria-label="Home"
+              onClick={handleHomeClick}
             >
               <svg
                 className="w-5 h-5"
@@ -187,7 +197,10 @@ export default function Header() {
         <div className="px-4 pt-4 pb-6 space-y-3">
           <NavLink
             to="/"
-            onClick={() => setOpen(false)}
+            onClick={(e) => {
+              setOpen(false);
+              handleHomeClick(e);
+            }}
             className="block text-slate-800 py-2 rounded-md hover:bg-slate-50"
           >
             Home
