@@ -37,7 +37,12 @@ export default function Home() {
               </p>
 
               <div className="mt-8 flex flex-wrap gap-3">
-                <PrimaryButton as={Link} to="/" variant="primary" size="lg">
+                <PrimaryButton
+                  as={Link}
+                  to="/templates"
+                  variant="primary"
+                  size="lg"
+                >
                   Explore Designs
                 </PrimaryButton>
 
