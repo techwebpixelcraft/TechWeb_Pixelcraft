@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="flex flex-col items-center md:items-start gap-4">
             <div className="flex items-center justify-center md:justify-start gap-3">
               <img
-                src="/public/images/TechWeb_Pixelcraft_logo.jpg"
+                src="/images/TechWeb_Pixelcraft_logo.jpg"
                 alt="TechWeb PixelCraft"
                 className="h-10 object-contain"
               />

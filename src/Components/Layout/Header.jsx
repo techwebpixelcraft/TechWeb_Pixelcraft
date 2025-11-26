@@ -55,7 +55,7 @@ export default function Header() {
             aria-label="Homepage"
           >
             <img
-              src="/public/images/TechWeb_Pixelcraft_logo.jpg"
+              src="/images/TechWeb_Pixelcraft_logo.jpg"
               alt="TechWeb PixelCraft"
               className="h-9 sm:h-10 md:h-12 object-contain"
             />
