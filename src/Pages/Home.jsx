@@ -311,27 +311,27 @@ export default function Home() {
           <div className="mt-6 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {[
               {
-                src: "/public/images/khodal_info_logo.jpg",
+                src: "/images/khodal_info_logo.jpg",
                 alt: "Khodal Info Logo",
                 desc: "Khodal Info — official logo used on visiting cards and banners.",
               },
               {
-                src: "/public/images/TechWeb_Pixelcraft_logo.jpg",
+                src: "/images/TechWeb_Pixelcraft_logo.jpg",
                 alt: "TechWeb PixelCraft Logo",
                 desc: "TechWeb PixelCraft — primary brand logo for digital and print.",
               },
               {
-                src: "/public/images/khodal_info.jpg",
+                src: "/images/khodal_info.jpg",
                 alt: "Khodal Info Poster",
                 desc: "Khodal Info — service flyer showing Aadhaar & PAN services.",
               },
               {
-                src: "/public/images/TechWeb_Pixelcraft_introduce.jpg",
+                src: "/images/TechWeb_Pixelcraft_introduce.jpg",
                 alt: "TechWeb PixelCraft Intro",
                 desc: "Intro visual for TechWeb PixelCraft brand presentation.",
               },
               {
-                src: "/public/images/khodal_info_visting.jpg",
+                src: "/images/khodal_info_visting.jpg",
                 alt: "Khodal Info Visiting Card",
                 desc: "Visiting card layout for Khodal Info with contact details.",
               },
