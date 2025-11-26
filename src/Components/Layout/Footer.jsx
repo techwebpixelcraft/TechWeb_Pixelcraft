@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="bg-white border-t mt-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        {/* GRID — centered on mobile */}
+        {/* GRID — stacks on mobile, 3 columns from md */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
           {/* BRAND */}
           <div className="flex flex-col items-center md:items-start gap-4">
@@ -28,16 +28,75 @@ export default function Footer() {
               out. Fast turnarounds and pixel-perfect craftsmanship.
             </p>
 
-            {/* SOCIALS */}
-            <div className="flex justify-center md:justify-start gap-4">
-              <a href="#" className="text-slate-500 hover:text-teal-600">
-                Instagram
+            {/* SOCIAL ICONS (Instagram + Facebook) */}
+            <div className="flex justify-center md:justify-start gap-3 mt-1">
+              {/* Instagram */}
+              <a
+                href="https://www.instagram.com/techweb_pixelcraft/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TechWeb PixelCraft on Instagram (opens in new tab)"
+                className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white border shadow-sm hover:shadow-md transition focus:outline-none focus:ring-2 focus:ring-teal-300"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="text-slate-700"
+                  aria-hidden
+                >
+                  <rect
+                    x="2"
+                    y="2"
+                    width="20"
+                    height="20"
+                    rx="5"
+                    stroke="currentColor"
+                    strokeWidth="1.2"
+                  />
+                  <path
+                    d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                    stroke="currentColor"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M17.5 6.5h.01"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </a>
-              <a href="#" className="text-slate-500 hover:text-teal-600">
-                Facebook
-              </a>
-              <a href="#" className="text-slate-500 hover:text-teal-600">
-                LinkedIn
+
+              {/* Facebook */}
+              <a
+                href="https://www.facebook.com/share/1BHcwTz994/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TechWeb PixelCraft on Facebook (opens in new tab)"
+                className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white border shadow-sm hover:shadow-md transition focus:outline-none focus:ring-2 focus:ring-teal-300"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="text-slate-700"
+                  aria-hidden
+                >
+                  <path
+                    d="M22 12.07C22 6.48 17.52 2 11.93 2S2 6.48 2 12.07c0 4.99 3.66 9.12 8.44 9.93v-7.03H7.9v-2.9h2.54V9.41c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.23.2 2.23.2v2.45h-1.25c-1.23 0-1.61.77-1.61 1.56v1.87h2.74l-.44 2.9h-2.3v7.03C18.34 21.19 22 17.06 22 12.07z"
+                    stroke="currentColor"
+                    strokeWidth="0.3"
+                    fill="currentColor"
+                  />
+                </svg>
               </a>
             </div>
           </div>
@@ -79,17 +138,17 @@ export default function Footer() {
             <div className="text-sm text-slate-600">
               <div>
                 WhatsApp:{" "}
-                <a href="tel:+919999999999" className="text-slate-800">
-                  +91 99999 99999
+                <a href="tel:+919924846727" className="text-slate-800">
+                  +91 99248 46727
                 </a>
               </div>
               <div className="mt-2">
                 Email:{" "}
                 <a
-                  href="mailto:hello@techwebpixelcraft.com"
+                  href="mailto:techwebpixelcraft@gmail.com"
                   className="text-slate-800"
                 >
-                  hello@techwebpixelcraft.com
+                  techwebpixelcraft@gmail.com
                 </a>
               </div>
             </div>
