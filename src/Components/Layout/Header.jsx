@@ -94,7 +94,7 @@ export default function Header() {
             </NavLink>
 
             <Link
-              to="/contact"
+              to="/get-quote"
               className="ml-2 inline-flex items-center gap-2 px-3 py-2 rounded-md bg-teal-600 text-white text-sm shadow-sm hover:bg-teal-700 transition"
             >
               Get Quote

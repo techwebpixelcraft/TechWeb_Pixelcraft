@@ -8,6 +8,7 @@ import Contact from "./Pages/ContactUs";
 import Header from "./Components/Layout/Header";
 import Footer from "./Components/Layout/Footer";
 import Templates from "./Pages/Templets";
+import GetQuote from "./Pages/GetQuote";
 
 export default function App() {
   return (
@@ -21,6 +22,8 @@ export default function App() {
           <Route path="/services" element={<Services />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/get-quote" element={<GetQuote />} />
+
           {/* fallback to home */}
           <Route path="*" element={<Home />} />
         </Routes>
