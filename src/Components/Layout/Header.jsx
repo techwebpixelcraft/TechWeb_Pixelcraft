@@ -83,9 +83,6 @@ export default function Header() {
             <NavLink to="/services" className={navClass}>
               Services
             </NavLink>
-            <NavLink to="/work" className={navClass}>
-              Our Work
-            </NavLink>
             <NavLink to="/about" className={navClass}>
               About
             </NavLink>

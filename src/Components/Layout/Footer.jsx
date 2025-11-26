@@ -117,9 +117,6 @@ export default function Footer() {
               >
                 Services
               </Link>
-              <Link to="/work" className="text-slate-600 hover:text-teal-600">
-                Our Work
-              </Link>
               <Link to="/about" className="text-slate-600 hover:text-teal-600">
                 About
               </Link>
